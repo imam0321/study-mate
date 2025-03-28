@@ -22,17 +22,14 @@ const userSchema = new Schema({
     required: true,
     type: Boolean,
   },
-
   category: {
     type: Schema.ObjectId,
     ref: "Category",
   },
-
   instructor: {
     type: Schema.ObjectId,
     ref: "User",
   },
-
   quizzes: {
     required: false,
     type: Schema.ObjectId,
@@ -46,4 +43,5 @@ const userSchema = new Schema({
   ],
 });
 
-const User = mongoose.models.User || mongoose.model("User", userSchema);
+export const Course =
+  mongoose.models.Course || mongoose.model("Course", userSchema);
