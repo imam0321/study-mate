@@ -5,6 +5,10 @@ const userSchema = new Schema({
     required: true,
     type: String,
   },
+  subtitle: {
+    required: true,
+    type: String,
+  },
   description: {
     required: true,
     type: String,
@@ -41,6 +45,20 @@ const userSchema = new Schema({
       ref: "Testimonial",
     },
   ],
+  learning: {
+    required: true,
+    type: [String],
+  },
+
+  createdOn: {
+    required: true,
+    type: Date,
+  },
+
+  modifiedOn: {
+    required: true,
+    type: Date,
+  },
 });
 
 export const Course =
