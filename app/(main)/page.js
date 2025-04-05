@@ -1,10 +1,9 @@
 import SectionTitle from "@/components/SectionTitle/SectionTitle";
-import { Button, buttonVariants } from "@/components/ui/button";
-import { formatPrice } from "@/lib/formatPrice";
+import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { getCategories } from "@/queries/categories";
 import { getCourseList } from "@/queries/courses";
-import { ArrowRight, ArrowRightIcon, BookOpen } from "lucide-react";
+import { ArrowRightIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import CourseCard from "./courses/_components/CourseCard/CourseCard";
