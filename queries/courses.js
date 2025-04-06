@@ -5,6 +5,7 @@ import { Module } from "@/models/module.model";
 import { Testimonial } from "@/models/testimonial-model";
 import { User } from "@/models/user-model";
 import { getEnrollmentsForCourse } from "./enrollment";
+import { getTestimonialForCourse } from "./testimonials";
 
 // Courses List
 export async function getCourseList() {
@@ -69,7 +70,7 @@ export async function getCourseDetails(id) {
 export async function getCourseDetailsByInstructor(InstructorId) {
   const courses = await Course.find({ Instructor: InstructorId }).lean();
 
-  // enrollments details
+  // enrollments counts
   const enrollments = await Promise.all(
     courses.map(async (course) => {
       const enrollment = await getEnrollmentsForCourse(course.id);
@@ -80,8 +81,26 @@ export async function getCourseDetailsByInstructor(InstructorId) {
     (item, currentValue) => item.length + currentValue.length
   );
 
+  // testimonials counts
+  const testimonials = await Promise.all(
+    courses.map(async (course) => {
+      const testimonial = await getTestimonialForCourse(course._id);
+      return testimonial;
+    })
+  );
+  // Multiple nested array to convert one array using flat
+  const totalTestimonials = testimonials.flat();
+
+  // Average Rating
+  const avgRating =
+    totalTestimonials.reduce((acc, obj) => {
+      return acc + obj.rating;
+    }, 0) / totalTestimonials.length;
+
   return {
     courses: courses.length,
     enrollments: totalEnrollments,
+    reviews: totalTestimonials.length,
+    ratings: avgRating.toPrecision(2),
   };
 }
