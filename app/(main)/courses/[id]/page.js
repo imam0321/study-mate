@@ -63,7 +63,7 @@ export default async function SingleCoursePage({ params: { id } }) {
       />
 
       {/* Course Details  */}
-      <CourseDetails />
+      <CourseDetails course={course} />
 
       {/* Testimonials */}
       {course?.testimonials && (
