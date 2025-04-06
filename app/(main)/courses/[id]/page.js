@@ -51,7 +51,6 @@ const courses = [
 
 export default async function SingleCoursePage({ params: { id } }) {
   const course = await getCourseDetails(id);
-  console.log(course.testimonials);
 
   return (
     <>
