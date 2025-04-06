@@ -1,4 +1,5 @@
 import mongoose, { Schema } from "mongoose";
+import { User } from "./user-model";
 
 const testimonialSchema = new Schema({
   content: {
@@ -6,8 +7,8 @@ const testimonialSchema = new Schema({
     type: String,
   },
   user: {
-    required: true,
-    type: String,
+    type: Schema.ObjectId,
+    ref: User,
   },
   courseId: {
     required: true,

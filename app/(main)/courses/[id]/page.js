@@ -3,6 +3,7 @@ import CourseDetails from "./_components/CourseDetails/CourseDetails";
 import Testimonials from "./_components/Testimonials/Testimonials";
 import RelatedCourses from "./_components/RelatedCourses/RelatedCourses";
 import { getCourseDetails } from "@/queries/courses";
+import { replaceMongoId } from "@/lib/convertData";
 
 const courses = [
   {
@@ -50,19 +51,24 @@ const courses = [
 
 export default async function SingleCoursePage({ params: { id } }) {
   const course = await getCourseDetails(id);
-  console.log(course);
-
+  console.log(course.testimonials);
 
   return (
     <>
       {/* Course Details Info  */}
-      <CourseDetailsInfo />
+      <CourseDetailsInfo
+        title={course?.title}
+        subtitle={course?.subtitle}
+        thumbnail={course?.thumbnail}
+      />
 
       {/* Course Details  */}
       <CourseDetails />
 
       {/* Testimonials */}
-      <Testimonials courses={courses} />
+      {course?.testimonials && (
+        <Testimonials testimonials={replaceMongoId(course?.testimonials)} />
+      )}
 
       {/* Related Course */}
       <RelatedCourses courses={courses} />
