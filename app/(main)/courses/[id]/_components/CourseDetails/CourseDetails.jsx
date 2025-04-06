@@ -6,8 +6,7 @@ import CourseCurriculum from './CourseCurriculum/CourseCurriculum';
 import CourseOverview from './CourseOverview/CourseOverview';
 
 export default function CourseDetails({ course }) {
-  const lastModifiedDate = formatMyDate(course?.modifiedOn)
-  console.log(course);
+  const lastModifiedDate = formatMyDate(course?.modifiedOn);
 
   return (
     <section className="py-8 md:py-12 lg:py-20">
@@ -47,13 +46,13 @@ export default function CourseDetails({ course }) {
               <TabsTrigger value="instructor">Instructor</TabsTrigger>
             </TabsList>
             <TabsContent value="overview">
-              <CourseOverview />
+              <CourseOverview course={course} />
             </TabsContent>
             <TabsContent value="curriculum">
-              <CourseCurriculum />
+              <CourseCurriculum course={course} />
             </TabsContent>
             <TabsContent value="instructor">
-              <CourseInstructor />
+              <CourseInstructor course={course} />
             </TabsContent>
           </Tabs>
         </div>

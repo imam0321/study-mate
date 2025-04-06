@@ -2,7 +2,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/
 import { cn } from '@/lib/utils'
 import { BookCheck, Clock10, FileQuestion, NotepadText, Radio, StickyNote, Tv, Video } from 'lucide-react'
 
-export default function CourseCurriculum() {
+export default function CourseCurriculum({course}) {
   return (
     <>
       <div class="flex gap-x-5 items-center justify-center flex-wrap mt-4 mb-6 text-gray-600 text-sm">
