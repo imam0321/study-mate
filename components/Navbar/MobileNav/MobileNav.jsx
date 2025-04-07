@@ -30,7 +30,7 @@ export default function MobileNav({ items, children }) {
         </nav>
         <div className="items-center gap-3 flex lg:hidden">
           <Link
-            href="/login"
+            href="/auth/login"
             className={cn(buttonVariants({ size: "sm" }), "px-4")}
           >
             Login
@@ -43,10 +43,10 @@ export default function MobileNav({ items, children }) {
             </DropdownMenuTrigger>
             <DropdownMenuContent align="center" className="w-56 mt-4">
               <DropdownMenuItem className="cursor-pointer">
-                <Link href="">Student</Link>
+                <Link href="/auth/register/student">Student</Link>
               </DropdownMenuItem>
               <DropdownMenuItem className="cursor-pointer">
-                <Link href="">Instructor</Link>
+                <Link href="/auth/register/instructor">Instructor</Link>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>

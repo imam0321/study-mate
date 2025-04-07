@@ -40,7 +40,7 @@ export default function MainNav({ items, children }) {
 			<nav className="flex items-center gap-3">
 				<div className="items-center gap-3 hidden lg:flex">
 					<Link
-						href="/login"
+						href="/auth/login"
 						className={cn(buttonVariants({ size: "sm" }), "px-4")}>
 						Login
 					</Link>
@@ -52,10 +52,10 @@ export default function MainNav({ items, children }) {
 						</DropdownMenuTrigger>
 						<DropdownMenuContent align="end" className="w-56 mt-4">
 							<DropdownMenuItem className="cursor-pointer">
-								<Link href="">Student</Link>
+								<Link href="/auth/register/student">Student</Link>
 							</DropdownMenuItem>
 							<DropdownMenuItem className="cursor-pointer">
-								<Link href="">Instructor</Link>
+								<Link href="/auth/register/instructor">Instructor</Link>
 							</DropdownMenuItem>
 						</DropdownMenuContent>
 					</DropdownMenu>
