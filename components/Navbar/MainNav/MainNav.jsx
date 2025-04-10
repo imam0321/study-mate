@@ -9,12 +9,17 @@ import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { signOut, useSession } from "next-auth/react";
+// import { redirect } from "next/navigation";
 
 
 export default function MainNav({ items, children }) {
 	const { data: session } = useSession();
 	const [showMobileMenu, setShowMobileMenu] = useState(false);
 	const [loginSession, setLoginSession] = useState(null);
+
+	// if (session?.error === "RefreshAccessTokenError") {
+	// 	redirect("/auth/login");
+	// }
 
 	useEffect(() => {
 		setLoginSession(session)
@@ -84,10 +89,10 @@ export default function MainNav({ items, children }) {
 					</DropdownMenuTrigger>
 					<DropdownMenuContent align="end" className="w-56 mt-4">
 						<DropdownMenuItem className="cursor-pointer" asChild>
-							<Link href="account">Profile</Link>
+							<Link href="/account">Profile</Link>
 						</DropdownMenuItem>
 						<DropdownMenuItem className="cursor-pointer" asChild>
-							<Link href="account/enrolled-courses">My Courses</Link>
+							<Link href="/account/enrolled-courses">My Courses</Link>
 						</DropdownMenuItem>
 						<DropdownMenuItem className="cursor-pointer" asChild>
 							<Link href="">Testimonials & Certificates</Link>

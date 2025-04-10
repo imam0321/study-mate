@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 
 export default function SiteFooter({ className }) {
   return (
@@ -8,40 +9,40 @@ export default function SiteFooter({ className }) {
           <h1 className="text-2xl font-semibold">Study Mate</h1>
           <p className="text-center text-sm leading-loose md:text-left">
             Built by{" "}
-            <a
+            <Link
               href="#"
               rel="noreferrer"
               className="font-medium underline underline-offset-4"
             >
               shadcn
-            </a>
+            </Link>
             . Hosted on{" "}
-            <a
+            <Link
               href="https://vercel.com"
               target="_blank"
               rel="noreferrer"
               className="font-medium underline underline-offset-4"
             >
               Vercel
-            </a>
+            </Link>
             . Illustrations by{" "}
-            <a
+            <Link
               href="https://popsy.co"
               target="_blank"
               rel="noreferrer"
               className="font-medium underline underline-offset-4"
             >
               Popsy
-            </a>
+            </Link>
             . The source code is available on{" "}
-            <a
+            <Link
               href="#"
               target="_blank"
               rel="noreferrer"
               className="font-medium underline underline-offset-4"
             >
               GitHub
-            </a>
+            </Link>
             .
           </p>
         </div>

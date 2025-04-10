@@ -15,6 +15,7 @@ export default function CourseCard({ course }) {
             alt={course.title}
             className="object-cover"
             fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
         </div>
         <div className="flex flex-col pt-2">
