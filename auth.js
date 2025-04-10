@@ -1,7 +1,9 @@
 import NextAuth from "next-auth";
-import CredentialProvider from "next-auth/providers/credentials";
+import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 import { User } from "./models/user-model";
+import { dbConnect } from "./service/mongo";
+
 
 export const {
   handlers: { GET, POST },
@@ -9,18 +11,19 @@ export const {
   signIn,
   signOut,
 } = NextAuth({
+  trustHost: true,
   session: {
     strategy: "jwt",
   },
   providers: [
     // credentials login
-    CredentialProvider({
+    CredentialsProvider({
       async authorize(credentials) {
+        await dbConnect();
         if (credentials == null) return null;
 
         try {
           const user = await User.findOne({ email: credentials.email });
-          console.log(user);
 
           if (user) {
             const isMatch = await bcrypt.compare(
