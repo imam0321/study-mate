@@ -2,7 +2,7 @@ import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 import { User } from "./models/user-model";
-import { dbConnect } from "./service/mongo";
+import { authConfig } from "./auth.config";
 
 
 export const {
@@ -12,14 +12,11 @@ export const {
   signOut,
 } = NextAuth({
   trustHost: true,
-  session: {
-    strategy: "jwt",
-  },
+  ...authConfig,
   providers: [
     // credentials login
     CredentialsProvider({
       async authorize(credentials) {
-        await dbConnect();
         if (credentials == null) return null;
 
         try {
