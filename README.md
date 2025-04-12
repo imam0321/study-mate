@@ -8,4 +8,5 @@ Study Mate is a LMS Next.js Project
 - Tailwind CSS
 - shadcn ui
 - MongoDB (Mongoose ORM)
+- Stripe
 
