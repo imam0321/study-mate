@@ -9,4 +9,5 @@ Study Mate is a LMS Next.js Project
 - shadcn ui
 - MongoDB (Mongoose ORM)
 - Stripe
+- Resend
 

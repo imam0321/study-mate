@@ -28,7 +28,7 @@ export async function createCheckoutSession(data) {
     ],
 
     ...(ui_mode === "hosted" && {
-      success_url: `${origin}/enroll-success?session_id={CHECKOUT_SESSION_ID}&courseId=${courseId}}`,
+      success_url: `${origin}/enroll-success?session_id={CHECKOUT_SESSION_ID}&courseId=${courseId}`,
       cancel_url: `${origin}/courses`,
     }),
     ui_mode,
