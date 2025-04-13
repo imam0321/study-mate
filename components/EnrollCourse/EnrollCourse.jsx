@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 import { createCheckoutSession } from "@/app/actions/stripe";
 
 
-export default function EnrollCourse({ asLink }) {
+export default function EnrollCourse({ asLink, course}) {
   const formAction = async (data) => {
     const { url } = await createCheckoutSession(data);
     window.location.assign(url);
@@ -14,6 +14,9 @@ export default function EnrollCourse({ asLink }) {
   return (
     <>
       <form action={formAction}>
+        <input type="hidden" name="courseId" value={course?.id} />
+        <input type="hidden" name="courseName" value={course?.title} />
+        <input type="hidden" name="coursePrice" value={course?.price} />
         {
           asLink ? (
             <Button

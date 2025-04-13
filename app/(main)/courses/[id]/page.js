@@ -56,9 +56,7 @@ export default async function SingleCoursePage({ params: { id } }) {
     <>
       {/* Course Details Info  */}
       <CourseDetailsInfo
-        title={course?.title}
-        subtitle={course?.subtitle}
-        thumbnail={course?.thumbnail}
+        course={course}
       />
 
       {/* Course Details  */}
