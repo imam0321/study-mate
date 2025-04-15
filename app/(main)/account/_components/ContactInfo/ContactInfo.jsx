@@ -28,7 +28,7 @@ export default function ContactInfo() {
           </div>
         </div>
         {/*end grid*/}
-        <Button className="mt-5" type="submit">
+        <Button className="mt-5 cursor-pointer" type="submit">
           Add
         </Button>
       </form>

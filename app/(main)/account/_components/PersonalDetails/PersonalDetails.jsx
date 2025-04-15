@@ -108,7 +108,7 @@ export default function PersonalDetails({ userInfo }) {
           </div>
         </div>
         {/*end row*/}
-        <Button className="mt-5" asChild>
+        <Button className="mt-5 cursor-pointer" asChild>
           <input type="submit" name="send" value="Save Changes" />
         </Button>
       </form>
