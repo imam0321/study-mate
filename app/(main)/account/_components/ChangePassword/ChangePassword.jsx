@@ -13,7 +13,6 @@ export default function ChangePassword({ email }) {
     reTypeNewPassword: ""
   });
 
-  console.log(email);
   const handleChange = (e) => {
     const key = e.target.name;
     const value = e.target.value;
