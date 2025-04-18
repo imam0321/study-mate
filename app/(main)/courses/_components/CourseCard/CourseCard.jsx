@@ -1,12 +1,22 @@
+import { auth } from "@/auth";
 import EnrollCourse from "@/components/EnrollCourse/EnrollCourse";
 import { Button } from "@/components/ui/button";
 import { formatPrice } from "@/lib/formatPrice";
+import { hasEnrollmentsForCourse } from "@/queries/enrollment";
+import { getUserByEmail } from "@/queries/users";
 import { ArrowRight, BookOpen } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
 
-export default function CourseCard({ course }) {
+export default async function CourseCard({ course }) {
+  const session = await auth();
+  if (!session.user) redirect("/login");
+  const loggedInUser = await getUserByEmail(session?.user?.email);
+
+  const hasEnrollment = await hasEnrollmentsForCourse(course?.id, loggedInUser?.id);
+
   return (
     <div className="group hover:shadow-sm transition overflow-hidden border rounded-lg p-3">
       <Link key={course.id} href={`/courses/${course.id}`}>
@@ -40,7 +50,19 @@ export default function CourseCard({ course }) {
         <p className="text-md md:text-sm font-medium text-slate-700">
           {formatPrice(course?.price)}
         </p>
-        <EnrollCourse asLink={true} courseId={course?.id} />
+        {hasEnrollment ? (
+          <Button
+            type="submit"
+            variant="ghost"
+            className="text-xs text-sky-700 h-7 gap-1"
+          >
+            Access Course
+            <ArrowRight className="w-3" />
+          </Button>
+
+        ) : (
+          <EnrollCourse asLink={true} courseId={course?.id} />
+        )}
       </div>
     </div>
   )

@@ -11,17 +11,16 @@ export default async function EnrolledCourseCard({ enrollment }) {
   const filter = { course: enrollment?.course?._id, student: enrollment?.student?._id };
 
   const report = await getReport(filter);
-  console.log("report:", report);
 
   // total completed modules 
-  const totalCompletedModules = report?.totalCompletedModeules?.length
+  const totalCompletedModules = report?.totalCompletedModeules?.length || 0;
 
   // get all quizzes and assessments
-  const quizzes = report?.quizAssessment?.assessments
+  const quizzes = report?.quizAssessment?.assessments || [];
   const totalQuizzes = quizzes?.length
 
   // find attempted quizzes 
-  const quizzesTaken = quizzes?.filter(q => q.attempted)
+  const quizzesTaken = quizzes?.filter(q => q.attempted) || [];
 
   // find how may quizzes answered correct
   const totalCorrect = quizzesTaken.map(quiz => {
@@ -31,13 +30,13 @@ export default async function EnrolledCourseCard({ enrollment }) {
     })
   }).filter(elem => elem.length > 0).flat()
   
-  const marksFromQuizzes = totalCorrect?.length * 5;
+  const marksFromQuizzes = totalCorrect?.length * 5 || 0;
 
   // other marks 
-  const otherMarks = report?.quizAssessment?.otherMarks;
+  const otherMarks = report?.quizAssessment?.otherMarks || 0;
 
   // total marks 
-  const totalMarks = (marksFromQuizzes + otherMarks)
+  const totalMarks = (marksFromQuizzes + otherMarks) || 0;
 
   return (
     <div className="group hover:shadow-sm transition overflow-hidden border rounded-lg p-3 h-full">

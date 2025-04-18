@@ -11,7 +11,6 @@ export default async function EnrolledCoursesPage() {
   const loggedInUser = await getUserByEmail(session?.user?.email);
 
   const enrollments = await getEnrollmentsForUser(loggedInUser?.id);
-  console.log(enrollments);
 
   return (
     <div className="grid sm:grid-cols-2 gap-6">
