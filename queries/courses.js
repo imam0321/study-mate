@@ -67,13 +67,13 @@ export async function getCourseDetails(id) {
 }
 
 // Course Details by Instructor and instructor details
-export async function getCourseDetailsByInstructor(InstructorId) {
-  const courses = await Course.find({ Instructor: InstructorId }).lean();
+export async function getCourseDetailsByInstructor(instructorId) {
+  const courses = await Course.find({ instructor: instructorId }).lean();
 
   // enrollments counts
   const enrollments = await Promise.all(
     courses.map(async (course) => {
-      const enrollment = await getEnrollmentsForCourse(course.id);
+      const enrollment = await getEnrollmentsForCourse(course._id.toString());
       return enrollment;
     })
   );
@@ -84,7 +84,7 @@ export async function getCourseDetailsByInstructor(InstructorId) {
   // testimonials counts
   const testimonials = await Promise.all(
     courses.map(async (course) => {
-      const testimonial = await getTestimonialForCourse(course._id);
+      const testimonial = await getTestimonialForCourse(course._id.toString());
       return testimonial;
     })
   );

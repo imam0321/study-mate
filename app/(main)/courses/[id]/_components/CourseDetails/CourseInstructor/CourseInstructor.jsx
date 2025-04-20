@@ -5,7 +5,8 @@ import Image from "next/image";
 
 export default async function CourseInstructor({ course }) {
   const instructor = course?.instructor;
-  const courseDetailsByInstructor = await getCourseDetailsByInstructor(instructor.id);
+  console.log(instructor._id);
+  const courseDetailsByInstructor = await getCourseDetailsByInstructor(instructor?._id);
 
   return (
     <div className="bg-gray-50 rounded-md p-8">

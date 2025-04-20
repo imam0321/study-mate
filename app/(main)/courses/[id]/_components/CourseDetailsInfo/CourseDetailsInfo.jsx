@@ -10,7 +10,6 @@ import { redirect } from 'next/navigation'
 
 export default async function CourseDetailsInfo({ course }) {
   const session = await auth();
-  if (!session.user) redirect("/login");
   const loggedInUser = await getUserByEmail(session?.user?.email);
 
   const hasEnrollment = await hasEnrollmentsForCourse(course?.id, loggedInUser?.id);
@@ -43,7 +42,7 @@ export default async function CourseDetailsInfo({ course }) {
                     Access Course
                   </Link>
                 ) : (
-                  <EnrollCourse asLink={false} courseId={course?.id} />
+                  <EnrollCourse asLink={false} session={session} courseId={course?.id} />
                 )}
 
                 <Link

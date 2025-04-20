@@ -12,7 +12,6 @@ import { redirect } from "next/navigation";
 
 export default async function CourseCard({ course }) {
   const session = await auth();
-  if (!session.user) redirect("/login");
   const loggedInUser = await getUserByEmail(session?.user?.email);
 
   const hasEnrollment = await hasEnrollmentsForCourse(course?.id, loggedInUser?.id);
@@ -61,7 +60,7 @@ export default async function CourseCard({ course }) {
           </Button>
 
         ) : (
-          <EnrollCourse asLink={true} courseId={course?.id} />
+          <EnrollCourse asLink={true} session={session} courseId={course?.id} />
         )}
       </div>
     </div>
