@@ -1,35 +1,31 @@
-"use client"
+"use client";
 
+import * as z from "zod";
+// import axios from "axios";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import * as z from "zod";
 
-import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 import { Pencil } from "lucide-react";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { toast } from "sonner";
-import VideoPlayer from "@/components/VideoPlayer/VideoPlayer";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
-  url: z.string().min(1, {
-    message: "Required",
-  }),
-  duration: z.string().min(1, {
-    message: "Required",
+  title: z.string().min(1, {
+    message: "Title is required",
   }),
 });
 
-export default function VideoUrlForm({ initialData, courseId, lessonId }) {
+
+export default function TitleForm({ initialData = {} }) {
   const router = useRouter();
   const [isEditing, setIsEditing] = useState(false);
 
@@ -44,74 +40,44 @@ export default function VideoUrlForm({ initialData, courseId, lessonId }) {
 
   const onSubmit = async (values) => {
     try {
-      toast.success("Lesson updated");
       toggleEdit();
       router.refresh();
-    } catch {
+    } catch (error) {
       toast.error("Something went wrong");
     }
   };
 
   return (
-    <div className="mt-6 border bg-slate-100 rounded-md p-4">
+    <div className="mt-6 border bg-gray-50 rounded-md p-4">
       <div className="font-medium flex items-center justify-between">
-        Video URL
+        Quiz set title
         <Button variant="ghost" onClick={toggleEdit}>
           {isEditing ? (
             <>Cancel</>
           ) : (
             <>
               <Pencil className="h-4 w-4 mr-2" />
-              Edit URL
+              Edit Title
             </>
           )}
         </Button>
       </div>
-      {!isEditing && (
-        <>
-          <p className="text-sm mt-2">
-            {"https://www.youtube.com/embed/Cn4G2lZ_g2I?si=8FxqU8_NU6rYOrG1"}
-          </p>
-          <div className="mt-6">
-            <VideoPlayer />
-          </div>
-        </>
-      )}
+      {!isEditing && <p className="text-sm mt-2">{initialData.title}</p>}
       {isEditing && (
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
             className="space-y-4 mt-4"
           >
-            {/* url */}
             <FormField
               control={form.control}
-              name="url"
+              name="title"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Video URL</FormLabel>
                   <FormControl>
                     <Input
                       disabled={isSubmitting}
-                      placeholder="e.g. 'Introduction to the course'"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            {/* duration */}
-            <FormField
-              control={form.control}
-              name="duration"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Video Duration</FormLabel>
-                  <FormControl>
-                    <Input
-                      disabled={isSubmitting}
-                      placeholder="e.g. '10:30:18'"
+                      placeholder="e.g. 'Advanced web development'"
                       {...field}
                     />
                   </FormControl>
