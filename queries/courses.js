@@ -81,6 +81,21 @@ export async function getCourseDetailsByInstructor(instructorId) {
     return acc + obj.length;
   }, 0);
 
+  // grouped By Courses
+  const groupedByCourses = enrollments.flat().reduce((acc, item) => {
+    const key = item.course;
+    if (!acc[key]) {
+      acc[key] = [];
+    }
+    acc[key].push(item);
+    return acc;
+  }, {});
+
+  // Total revenue
+  const totalRevenue = courses.reduce((acc, course) => {
+    return acc + groupedByCourses[course?._id].length * course.price;
+  }, 0);
+
   // testimonials counts
   const testimonials = await Promise.all(
     courses.map(async (course) => {
@@ -102,5 +117,6 @@ export async function getCourseDetailsByInstructor(instructorId) {
     enrollments: totalEnrollments,
     reviews: totalTestimonials.length,
     ratings: avgRating.toPrecision(2),
+    revenue: totalRevenue,
   };
 }

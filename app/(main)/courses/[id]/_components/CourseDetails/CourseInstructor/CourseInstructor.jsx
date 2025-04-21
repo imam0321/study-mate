@@ -5,7 +5,6 @@ import Image from "next/image";
 
 export default async function CourseInstructor({ course }) {
   const instructor = course?.instructor;
-  console.log(instructor._id);
   const courseDetailsByInstructor = await getCourseDetailsByInstructor(instructor?._id);
 
   return (
