@@ -4,13 +4,14 @@ import { dbConnect } from "@/service/mongo";
 import { NextResponse } from "next/server";
 
 // user details api
-export const GET = async (request) => {
+export const GET = async () => {
   const session = await auth();
 
   if (!session?.user) {
-    return NextResponse(`You are not authenticated!`, {
-      status: 401,
-    });
+    return NextResponse.json(
+      { message: "You are not authenticated!" },
+      { status: 401 }
+    );
   }
 
   try {
